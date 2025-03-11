@@ -9,6 +9,7 @@ import (
 	"github.com/cortezaproject/corteza/server/federation/types"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
 	"github.com/cortezaproject/corteza/server/pkg/logger"
+	"github.com/davecgh/go-spew/spew"
 	"go.uber.org/zap"
 )
 
@@ -62,6 +63,8 @@ func (w *syncWorkerData) PrepareForNodes(ctx context.Context, urls chan Url) {
 		}
 
 		set, err := w.syncService.GetSharedModules(ctx, n.ID)
+
+		spew.Dump("lokiiss1", set)
 
 		if err != nil {
 			w.logger.Info("could not get shared modules, skipping",

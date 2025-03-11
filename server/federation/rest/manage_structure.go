@@ -6,6 +6,7 @@ import (
 	"github.com/cortezaproject/corteza/server/federation/rest/request"
 	"github.com/cortezaproject/corteza/server/federation/service"
 	"github.com/cortezaproject/corteza/server/federation/types"
+	"github.com/davecgh/go-spew/spew"
 )
 
 type (
@@ -98,6 +99,7 @@ func (ctrl ManageStructure) CreateMappings(ctx context.Context, r *request.Manag
 	})
 
 	if err != nil {
+		spew.Dump("kerero", err)
 		return nil, err
 	}
 
@@ -121,6 +123,8 @@ func (ctrl ManageStructure) ReadMappings(ctx context.Context, r *request.ManageS
 	}
 
 	set, _, err := service.DefaultModuleMapping.Find(ctx, f)
+
+	spew.Dump("kioneee", set)
 
 	if err != nil {
 		return nil, err

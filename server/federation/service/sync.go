@@ -14,6 +14,7 @@ import (
 	"github.com/cortezaproject/corteza/server/pkg/filter"
 	ss "github.com/cortezaproject/corteza/server/system/service"
 	st "github.com/cortezaproject/corteza/server/system/types"
+	"github.com/davecgh/go-spew/spew"
 )
 
 type (
@@ -64,6 +65,8 @@ func (s *Sync) CanUpdateSharedModule(ctx context.Context, new *types.SharedModul
 // ProcessPayload passes the payload to the syncer lib
 func (s *Sync) ProcessPayload(ctx context.Context, payload []byte, out chan Url, url types.SyncerURI, processer Processer) (ProcesserResponse, error) {
 	ctx = auth.SetIdentityToContext(ctx, auth.FederationUser())
+
+	spew.Dump("kajulu", auth.FederationUser(), url)
 
 	return s.syncer.Process(ctx, payload, out, url, processer)
 }

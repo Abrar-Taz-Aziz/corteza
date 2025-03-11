@@ -8,6 +8,7 @@ import (
 	"github.com/cortezaproject/corteza/server/federation/types"
 	"github.com/cortezaproject/corteza/server/pkg/actionlog"
 	"github.com/cortezaproject/corteza/server/store"
+	"github.com/davecgh/go-spew/spew"
 )
 
 type (
@@ -91,6 +92,7 @@ func (svc moduleMapping) Find(ctx context.Context, filter types.ModuleMappingFil
 
 	err = func() error {
 		if set, f, err = store.SearchFederationModuleMappings(ctx, svc.store, filter); err != nil {
+			spew.Dump("mlio", err, filter)
 			return err
 		}
 

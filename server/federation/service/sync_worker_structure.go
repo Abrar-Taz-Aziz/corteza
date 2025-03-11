@@ -9,6 +9,7 @@ import (
 	"github.com/cortezaproject/corteza/server/federation/types"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
 	"github.com/cortezaproject/corteza/server/pkg/logger"
+	"github.com/davecgh/go-spew/spew"
 	"go.uber.org/zap"
 )
 
@@ -177,6 +178,7 @@ func (w *syncWorkerStructure) Watch(ctx context.Context, delay time.Duration, li
 			}
 
 			processed, errProcess := w.syncService.ProcessPayload(ctx, body, urls, u, meta)
+			spew.Dump("makulukulu",processed)
 			countProcess += processed.(structureProcesserResponse).Processed
 
 			// error raised before the actual persist process

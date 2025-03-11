@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/cortezaproject/corteza/server/federation/types"
+	"github.com/davecgh/go-spew/spew"
 )
 
 type (
@@ -83,6 +84,8 @@ func (h *Syncer) Process(ctx context.Context, payload []byte, out chan Url, url 
 			Meta: processer,
 		}
 	}
+
+	spew.Dump("waaawa", payload)
 
 	return processer.Process(ctx, payload)
 }
