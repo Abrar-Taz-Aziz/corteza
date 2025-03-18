@@ -162,13 +162,23 @@ func (s *Store) Search{{ .expIdentPlural }}(ctx context.Context, {{ template "ex
 		}
 	}
 
-	// Make sure results are always sorted at least by primary keys
-	if f.Sort.Get("id") == nil {
-		f.Sort = append(f.Sort, &filter.SortExpr{
-			Column:     "id",
-			Descending: f.Sort.LastDescending(),
-		})
-	}
+	{{ if eq .expIdentPlural "FederationModuleMappings" }}
+	    // Make sure results are always sorted at least by primary keys
+		if f.Sort.Get("node_id") == nil {
+			f.Sort = append(f.Sort, &filter.SortExpr{
+				Column:     "node_id",
+				Descending: f.Sort.LastDescending(),
+			})
+		}
+	{{ else }}
+	    // Make sure results are always sorted at least by primary keys
+		if f.Sort.Get("id") == nil {
+			f.Sort = append(f.Sort, &filter.SortExpr{
+				Column:     "id",
+				Descending: f.Sort.LastDescending(),
+			})
+		}
+	{{ end }}
 
 
 	// Cloned sorting instructions for the actual sorting
